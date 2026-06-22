@@ -1,0 +1,238 @@
+{
+  "nav": {
+    "services": "Servicios",
+    "gallery": "Galería",
+    "about": "Sobre nosotros",
+    "testimonials": "Testimonios",
+    "planner": "Planificador",
+    "moodboard": "Moodboard",
+    "estimate": "Presupuesto",
+    "freeEstimate": "Presupuesto gratis"
+  },
+  "hero": {
+    "tagline": "Servicios de mantenimiento y remodelación — realizados con treinta años de oficio, presupuestos honestos y un sitio limpio.",
+    "startProject": "Comienza tu proyecto",
+    "viewWork": "Ver nuestro trabajo",
+    "scroll": "Desplázate"
+  },
+  "services": {
+    "title": "Lo que hacemos — y cómo lo hacemos.",
+    "subtitle": "Siete oficios principales, un equipo cuidadoso. Llegamos a tiempo, dejamos el sitio más limpio de lo que lo encontramos y terminamos lo que empezamos.",
+    "eyebrow": "Servicios",
+    "drywall": {
+      "name": "Drywall",
+      "desc": "Parches, instalación completa de yeso, paredes y techos acabados."
+    },
+    "painting": {
+      "name": "Pintura",
+      "desc": "Interior y exterior. Consulta de color, preparación y acabado impecable."
+    },
+    "kitchens": {
+      "name": "Cocinas",
+      "desc": "Remodelaciones completas, gabinetes personalizados, encimeras y diseños modernos."
+    },
+    "flooring": {
+      "name": "Pisos",
+      "desc": "Madera, laminado, vinilo, azulejo — instalado a nivel, sellado limpio."
+    },
+    "windows": {
+      "name": "Ventanas",
+      "desc": "Reemplazo, sellado del clima, mejoras de eficiencia energética."
+    },
+    "carpentry": {
+      "name": "Carpintería",
+      "desc": "Molduras, empotrados, puertas, estructuras — terminado a mano, a nivel."
+    },
+    "repairs": {
+      "name": "Reparaciones generales",
+      "desc": "La lista de tareas pendientes, hecha bien. Arreglos pequeños y grandes listas."
+    }
+  },
+  "gallery": {
+    "title": "Arrastra el divisor. Ve la diferencia.",
+    "subtitle": "Casas reales. Antes y después reales. Arrastra el deslizador para comparar cómo se veía el espacio el día que entramos.",
+    "eyebrow": "Galería",
+    "all": "Todos",
+    "kitchen": "Cocina",
+    "bathroom": "Baño",
+    "flooring": "Pisos",
+    "before": "Antes",
+    "after": "Después",
+    "empty": "Aún no hay proyectos en esta categoría — vuelve pronto."
+  },
+  "about": {
+    "title": "El tipo de contratista que realmente recomendarías.",
+    "subtitle": "Tres principios que no han cambiado desde que comenzamos. Son la razón por la que la mayoría de nuestro trabajo proviene de clientes anteriores.",
+    "eyebrow": "Acerca de",
+    "experience": {
+      "title": "Experiencia",
+      "body": "Treinta años en el oficio. Cocinas, baños, adiciones, renovaciones completas de casas y los mil trabajos pequeños intermedios. Hemos visto las sorpresas detrás de cada pared.",
+      "stat": "30+ años"
+    },
+    "honesty": {
+      "title": "Honestidad",
+      "body": "Presupuestos detallados antes de levantar un martillo. Sin líneas vagas, sin cambios sorpresa. Si algo en la pared cambia el plan, te lo decimos antes de que te cueste.",
+      "stat": "Precio fijo"
+    },
+    "clean": {
+      "title": "Trabajo limpio",
+      "body": "Lona abajo, barreras de polvo arriba, zapatos fuera en la puerta. Terminamos cada día con un sitio limpio, y dejamos tu hogar más limpio de lo que encontramos.",
+      "stat": "Política del sitio"
+    },
+    "quote": "Trataron nuestro hogar como si fuera el de ellos. El presupuesto fue honesto, el trabajo fue limpio, y terminaron un día antes.",
+    "author": "— María R., Remodelación de cocina · 2025"
+  },
+  "planner": {
+    "title": "Diseña tu proyecto de ensueño en minutos.",
+    "subtitle": "Cuéntanos tu visión. Nosotros nos encargamos del resto.",
+    "eyebrow": "Inicia tu proyecto",
+    "cards": {
+      "plan": {
+        "label": "Comienza a planificar",
+        "desc": "Responde algunas preguntas sobre tu espacio",
+        "title": "Algunas preguntas rápidas",
+        "body": "Cuéntanos la sala, el alcance aproximado (cosmético vs estructural), tu cronograma ideal y presupuesto aproximado. Enviaremos un plan realista en dos días hábiles.",
+        "cta": "Abre el estimador"
+      },
+      "upload": {
+        "label": "Sube inspiración",
+        "desc": "Comparte fotos de estilos que te encantan — tableros de Pinterest, capturas, lo que sea.",
+        "title": "Envíanos tus referencias",
+        "body": "Suelta fotos en el Paso 2 del estimador, o envíalas por DM en Instagram. Igualaremos materiales y acabados a lo que nos muestras — no lo que sea más fácil de instalar.",
+        "cta": "Sube en el estimador"
+      },
+      "notebook": {
+        "label": "Construye tu cuaderno",
+        "desc": "Guarda ideas y referencias en un solo lugar — como un tablero de inspiración para tu proyecto.",
+        "title": "Fija ideas de nuestro moodboard",
+        "body": "Explora nuestros tableros curados — colores, materiales, acabados — y fija los que te encantan. Se guardan en tu dispositivo, y puedes mostrarnos tu cuaderno cuando visitemos.",
+        "cta": "Abre el moodboard"
+      }
+    }
+  },
+  "moodboard": {
+    "title": "Fija lo que te encanta. Construye tu cuaderno.",
+    "subtitle": "Explora colores, materiales, acabados y salas con las que hemos trabajado. Marca con corazón las que se sienten como hogar — se guardan en tu dispositivo.",
+    "eyebrow": "Tablero de inspiración (Moodboard)",
+    "myNotebook": "Mi cuaderno",
+    "pin": "idea",
+    "pins": "ideas",
+    "saved": "guardado",
+    "categories": {
+      "colors": "Colores",
+      "materials": "Materiales",
+      "styles": "Estilos",
+      "flooring": "Pisos",
+      "kitchens": "Cocinas",
+      "miniSplits": "Mini-splits",
+      "lighting": "Iluminación"
+    },
+    "empty": "Fija colores, materiales y estilos del moodboard. Se guardarán aquí, en tu dispositivo.",
+    "clearAll": "Limpiar todo",
+    "shareWithUs": "Comparte con nosotros →"
+  },
+  "estimate": {
+    "title": "Tres pasos. Dos días hábiles. Cero presión.",
+    "subtitle": "Cuéntanos sobre el proyecto, el look que buscas y cómo comunicarte con nosotros. Volveremos con un plan honesto, un presupuesto detallado y una cronología realista.",
+    "eyebrow": "Obtén tu presupuesto gratis",
+    "features": [
+      "Sin cargos ocultos, nunca",
+      "Presupuesto en 2 días hábiles",
+      "Licenciado, asegurado e indemnizado"
+    ],
+    "step1": {
+      "title": "Tu proyecto",
+      "service": "Tipo de servicio",
+      "selectService": "Selecciona un servicio…",
+      "roomSize": "Tamaño de la sala",
+      "roomSizeHint": "Pies cuadrados, o una descripción aproximada (p. ej., baño pequeño).",
+      "roomSizePlaceholder": "p. ej. 120 pies² / cocina mediana",
+      "budget": "Presupuesto aproximado",
+      "budgetLabel": {
+        "small": "Proyecto pequeño",
+        "midRange": "Rango medio",
+        "fullRemodel": "Remodelación completa",
+        "wholeHome": "Casa entera"
+      }
+    },
+    "step2": {
+      "title": "Tu visión",
+      "style": "Estilo deseado",
+      "photos": "Enlaces de fotos de inspiración",
+      "photosHint": "Google Fotos, Google Drive, Dropbox — cualquier URL de imagen compartible.",
+      "photoPlaceholder": "https://photos.google.com/share/...",
+      "photoError": "Por favor, ingresa una URL válida que comience con http:// o https://",
+      "photoDuplicate": "Este enlace ya está en la lista.",
+      "addLink": "Añadir",
+      "notes": "Algo más",
+      "notesHint": "Opcional. Restricciones, plazos, requisitos específicos.",
+      "notesPlaceholder": "p. ej. Tenemos dos niños y un perro, trabajo de fin de semana está bien, queremos terminado para Acción de Gracias…"
+    },
+    "step3": {
+      "title": "Tu información",
+      "name": "Nombre",
+      "namePlaceholder": "Nombre y apellido",
+      "phone": "Teléfono",
+      "phonePlaceholder": "(555) 010-0123",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "tu@email.com",
+      "contactMethod": "Método de contacto preferido",
+      "whatsapp": "WhatsApp",
+      "call": "Llamada",
+      "instagram": "DM de Instagram"
+    },
+    "submit": "Enviar presupuesto gratis",
+    "back": "← Atrás",
+    "continue": "Continuar →",
+    "success": {
+      "title": "Lo tenemos, {{name}}.",
+      "subtitle": "Revisaremos tu proyecto y nos comunicaremos con {{method}} en dos días hábiles con un plan y presupuesto.",
+      "restart": "Empezar otro"
+    }
+  },
+  "contact": {
+    "title": "Pro Maintenance Corp.",
+    "subtitle": "Servicios de mantenimiento y remodelación realizados con experiencia, honestidad y un sitio limpio — sirviendo con orgullo a Escondido y el Condado del Norte.",
+    "callButton": "Llamar {{phone}}",
+    "emailButton": "Envía un correo",
+    "whatsappButton": "Escríbenos en WhatsApp",
+    "visit": "Ubicación",
+    "address": "1637 E. Valley Pkwy #373 Escondido, CA 92027",
+    "directions": "Ver direcciones →",
+    "getInTouch": "Ponte en contacto",
+    "phone": "{{phone}}",
+    "email": "{{email}}",
+    "mapPreview": "Vista previa del mapa",
+    "copyright": "© 2025 Pro Maintenance Corp. Todos los derechos reservados.",
+    "license": "Licenciado · Asegurado · Indemnizado",
+    "instagramLabel": "Síguenos en Instagram",
+    "facebookLabel": "Síguenos en Facebook",
+    "tiktokLabel": "Síguenos en TikTok",
+    "emailCta": "Envía un correo",
+    "whatsappCta": "WhatsApp"
+  },
+  "validation": {
+    "selectService": "Elige un servicio.",
+    "enterRoomSize": "Cuéntanos el tamaño, aunque sea aproximado.",
+    "selectStyle": "Elige una dirección (puedes cambiarla después).",
+    "enterName": "Necesitamos un nombre.",
+    "invalidPhone": "Parece un teléfono inválido.",
+    "invalidEmail": "Parece un correo inválido.",
+    "selectContact": "Elige cómo comunicarte con nosotros."
+  },
+  "testimonials": {
+    "title": "Lo que dicen nuestros clientes.",
+    "subtitle": "Comentarios reales de proyectos reales. Aquí te mostramos qué piensan los propietarios sobre nuestro trabajo.",
+    "eyebrow": "Testimonios",
+    "customer": "Cliente de Pro Maintenance",
+    "reviews": {
+      "lillian": "¡Pro Maintenance transformó mi hogar! Su equipo fue puntual, profesional y completó las reparaciones de manera eficiente. No podría estar más feliz con los resultados y recomiendo altamente sus servicios a cualquiera que necesite mantenimiento del hogar.",
+      "daniel": "¡Pro Maintenance superó mis expectativas! Su equipo fue confiable, detallista y completó el trabajo a tiempo. La calidad de su trabajo realmente destaca. Definitivamente los recomendaría a cualquiera que busque servicios confiables de mantenimiento del hogar.",
+      "james": "Experiencia excepcional con Pro Maintenance. De la programación a la finalización, todo fue fluido y profesional. El equipo prestó gran atención a los detalles y entregó resultados excelentes. Definitivamente usaré sus servicios nuevamente.",
+      "rabab": "Los técnicos fueron conocedores, corteses y explicaron todo claramente. Las reparaciones se hicieron perfectamente y mi hogar se siente como nuevo. ¡Altamente recomendado!",
+      "satoshi": "Pro Maintenance proporcionó un servicio rápido, eficiente y de alta calidad. Es reconfortante trabajar con una empresa que realmente se preocupa por sus clientes y sus hogares."
+    },
+    "cta": "¿Listo para ver la diferencia que hace la calidad?",
+    "ctaButton": "Comienza tu proyecto"
+  }
+}

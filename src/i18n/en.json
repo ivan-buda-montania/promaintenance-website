@@ -1,0 +1,238 @@
+{
+  "nav": {
+    "services": "Services",
+    "gallery": "Gallery",
+    "about": "About",
+    "testimonials": "Testimonials",
+    "planner": "Planner",
+    "moodboard": "Moodboard",
+    "estimate": "Estimate",
+    "freeEstimate": "Free Estimate"
+  },
+  "hero": {
+    "tagline": "Maintenance & Remodeling Services — done with thirty years of craft, honest quotes, and a clean jobsite.",
+    "startProject": "Start Your Project",
+    "viewWork": "View Our Work",
+    "scroll": "Scroll"
+  },
+  "services": {
+    "title": "What we do — and how we do it.",
+    "subtitle": "Seven core trades, one careful crew. We show up on time, leave the site cleaner than we found it, and finish what we start.",
+    "eyebrow": "Services",
+    "drywall": {
+      "name": "Drywall",
+      "desc": "Patches, full sheetrock installs, smooth-finished walls and ceilings."
+    },
+    "painting": {
+      "name": "Painting",
+      "desc": "Interior and exterior. Color consultation, prep, and a flawless finish."
+    },
+    "kitchens": {
+      "name": "Kitchens",
+      "desc": "Full remodels, custom cabinetry, countertops and modern layouts."
+    },
+    "flooring": {
+      "name": "Flooring",
+      "desc": "Hardwood, laminate, vinyl, tile — installed level, sealed clean."
+    },
+    "windows": {
+      "name": "Windows",
+      "desc": "Replacement, weather sealing, energy-efficient upgrades."
+    },
+    "carpentry": {
+      "name": "Carpentry",
+      "desc": "Trim, built-ins, doors, framing — finished by hand, on the level."
+    },
+    "repairs": {
+      "name": "General Repairs",
+      "desc": "The honey-do list, done right. Small fixes to big punch lists."
+    }
+  },
+  "gallery": {
+    "title": "Drag the divider. See the difference.",
+    "subtitle": "Real homes. Real before-and-afters. Pull the slider to compare what the space looked like the day we walked in.",
+    "eyebrow": "Gallery",
+    "all": "All",
+    "kitchen": "Kitchen",
+    "bathroom": "Bathroom",
+    "flooring": "Flooring",
+    "before": "Before",
+    "after": "After",
+    "empty": "No projects in this category yet — check back soon."
+  },
+  "about": {
+    "title": "The kind of contractor you'd actually recommend.",
+    "subtitle": "Three principles that haven't moved since we started. They're the reason most of our work comes from past clients.",
+    "eyebrow": "About",
+    "experience": {
+      "title": "Experience",
+      "body": "Thirty years on the trade. Kitchens, baths, additions, full-home renovations and the thousand small jobs in between. We've seen the surprises behind every wall.",
+      "stat": "30+ yrs"
+    },
+    "honesty": {
+      "title": "Honesty",
+      "body": "Itemized quotes before we lift a hammer. No vague line items, no surprise change orders. If something on the wall changes the plan, we tell you before it costs you.",
+      "stat": "Flat-rate"
+    },
+    "clean": {
+      "title": "Clean Work",
+      "body": "Drop cloths down, dust barriers up, shoes off at the door. We finish each day with a swept site, and we leave your home cleaner than we walked into.",
+      "stat": "Jobsite policy"
+    },
+    "quote": "They treated our home like it was theirs. Quote was honest, work was clean, and they finished a day early.",
+    "author": "— María R., Kitchen Remodel · 2025"
+  },
+  "planner": {
+    "title": "Design your dream project in minutes.",
+    "subtitle": "Tell us your vision. We'll handle the rest.",
+    "eyebrow": "Start your project",
+    "cards": {
+      "plan": {
+        "label": "Start Planning",
+        "desc": "Answer a few questions about your space",
+        "title": "A few quick questions",
+        "body": "Tell us the room, the rough scope (cosmetic vs structural), your ideal timeline and ballpark budget. We'll send back a realistic plan within two business days.",
+        "cta": "Open the estimator"
+      },
+      "upload": {
+        "label": "Upload Inspiration",
+        "desc": "Share photos of styles you love — Pinterest boards, screenshots, anything.",
+        "title": "Send us your references",
+        "body": "Drop photos in the estimator's Step 2, or DM them on Instagram. We'll match materials and finishes to what you're showing us — not what's easiest to install.",
+        "cta": "Upload in estimator"
+      },
+      "notebook": {
+        "label": "Build Your Notebook",
+        "desc": "Save ideas and references in one place — like a moodboard for your project.",
+        "title": "Pin from our moodboard",
+        "body": "Browse our curated boards below — colors, materials, finishes — and pin the ones you love. They save to your device, and you can show us your notebook when we visit.",
+        "cta": "Open the moodboard"
+      }
+    }
+  },
+  "moodboard": {
+    "title": "Pin what you love. Build your notebook.",
+    "subtitle": "Browse colors, materials, finishes and rooms we've worked with. Heart the ones that feel like home — they save to your device.",
+    "eyebrow": "Moodboard",
+    "myNotebook": "My Notebook",
+    "pin": "pin",
+    "pins": "pins",
+    "saved": "saved",
+    "categories": {
+      "colors": "Colors",
+      "materials": "Materials",
+      "styles": "Styles",
+      "flooring": "Flooring",
+      "kitchens": "Kitchens",
+      "miniSplits": "Mini-splits",
+      "lighting": "Lighting"
+    },
+    "empty": "Pin colors, materials and styles from the moodboard. They'll save here, on your device.",
+    "clearAll": "Clear all",
+    "shareWithUs": "Share with us →"
+  },
+  "estimate": {
+    "title": "Three steps. Two business days. Zero pressure.",
+    "subtitle": "Tell us about the project, the look you're after, and how to reach you. We'll come back with an honest plan, an itemized quote, and a realistic timeline.",
+    "eyebrow": "Get your free estimate",
+    "features": [
+      "No hidden fees, ever",
+      "Quote within 2 business days",
+      "Licensed, bonded & insured"
+    ],
+    "step1": {
+      "title": "Your project",
+      "service": "Service type",
+      "selectService": "Select a service…",
+      "roomSize": "Room size",
+      "roomSizeHint": "Square feet, or just a rough description (e.g. small bathroom).",
+      "roomSizePlaceholder": "e.g. 120 sq ft / medium kitchen",
+      "budget": "Approximate budget",
+      "budgetLabel": {
+        "small": "Small project",
+        "midRange": "Mid-range",
+        "fullRemodel": "Full remodel",
+        "wholeHome": "Whole-home"
+      }
+    },
+    "step2": {
+      "title": "Your vision",
+      "style": "Desired style",
+      "photos": "Inspiration photo links",
+      "photosHint": "Google Photos, Google Drive, Dropbox — any shareable image URL.",
+      "photoPlaceholder": "https://photos.google.com/share/...",
+      "photoError": "Please enter a valid URL starting with http:// or https://",
+      "photoDuplicate": "This link is already in the list.",
+      "addLink": "Add",
+      "notes": "Anything else",
+      "notesHint": "Optional. Constraints, deadlines, specific must-haves.",
+      "notesPlaceholder": "e.g. We have two kids and a dog, weekend work is fine, we want it done by Thanksgiving…"
+    },
+    "step3": {
+      "title": "Your info",
+      "name": "Name",
+      "namePlaceholder": "First and last name",
+      "phone": "Phone",
+      "phonePlaceholder": "(555) 010-0123",
+      "email": "Email",
+      "emailPlaceholder": "you@email.com",
+      "contactMethod": "Preferred contact method",
+      "whatsapp": "WhatsApp",
+      "call": "Call",
+      "instagram": "Instagram DM"
+    },
+    "submit": "Send for free estimate",
+    "back": "← Back",
+    "continue": "Continue →",
+    "success": {
+      "title": "We've got it, {{name}}.",
+      "subtitle": "We'll review your project and reach out via {{method}} within two business days with a plan and a quote.",
+      "restart": "Start another"
+    }
+  },
+  "contact": {
+    "title": "Pro Maintenance Corp.",
+    "subtitle": "Home maintenance and remodeling done with experience, honesty and a clean jobsite — proudly serving Escondido and North County.",
+    "callButton": "Call {{phone}}",
+    "emailButton": "Email us",
+    "whatsappButton": "Message us on WhatsApp",
+    "visit": "Location",
+    "address": "1637 E. Valley Pkwy #373 Escondido, CA 92027",
+    "directions": "View directions →",
+    "getInTouch": "Get in touch",
+    "phone": "{{phone}}",
+    "email": "{{email}}",
+    "mapPreview": "Map preview",
+    "copyright": "© 2025 Pro Maintenance Corp. All rights reserved.",
+    "license": "Licensed · Bonded · Insured",
+    "instagramLabel": "Follow on Instagram",
+    "facebookLabel": "Follow on Facebook",
+    "tiktokLabel": "Follow on TikTok",
+    "emailCta": "Email us",
+    "whatsappCta": "WhatsApp"
+  },
+  "validation": {
+    "selectService": "Pick a service.",
+    "enterRoomSize": "Tell us the size, even roughly.",
+    "selectStyle": "Pick a direction (you can change later).",
+    "enterName": "We need a name.",
+    "invalidPhone": "Looks like an invalid phone.",
+    "invalidEmail": "Looks like an invalid email.",
+    "selectContact": "Pick how to reach you."
+  },
+  "testimonials": {
+    "title": "What our clients say.",
+    "subtitle": "Real feedback from real projects. Here's what homeowners think of our work.",
+    "eyebrow": "Testimonials",
+    "customer": "Pro Maintenance Client",
+    "reviews": {
+      "lillian": "Pro Maintenance transformed my home! Their team was punctual, professional, and completed the repairs efficiently. I couldn't be happier with the results and highly recommend their services to anyone in need of home maintenance.",
+      "daniel": "Pro Maintenance exceeded my expectations! Their team was reliable, detail-oriented, and completed the job on time. The quality of their work truly stands out. I would definitely recommend them to anyone looking for dependable home maintenance services.",
+      "james": "Outstanding experience with Pro Maintenance. From scheduling to completion, everything was smooth and professional. The team paid great attention to detail and delivered excellent results. I will absolutely use their services again.",
+      "rabab": "The technicians were knowledgeable, courteous, and explained everything clearly. The repairs were done perfectly, and my home feels like new again. Highly recommended!",
+      "satoshi": "Pro Maintenance provided fast, efficient, and high-quality service. It's refreshing to work with a company that truly cares about its customers and their homes."
+    },
+    "cta": "Ready to see the difference quality makes?",
+    "ctaButton": "Start your project"
+  }
+}
