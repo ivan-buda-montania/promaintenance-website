@@ -65,13 +65,12 @@ export default function BeforeAfterSlider({ before, after, alt }) {
 
       <div
         className="absolute inset-0 overflow-hidden"
-        style={{ width: `${position}%` }}
+        style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
       >
         <img
           src={before}
           alt={`${alt} — before`}
           className="absolute inset-0 h-full w-full object-cover"
-          style={{ width: `${(100 / position) * 100}%`, minWidth: "100%" }}
           draggable={false}
         />
       </div>
