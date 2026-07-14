@@ -66,7 +66,7 @@
     "eyebrow": "About",
     "experience": {
       "title": "Experience",
-      "body": "Thirty years on the trade. Kitchens, baths, additions, full-home renovations and the thousand small jobs in between. We've seen the surprises behind every wall.",
+      "body": "Thirty years in the trade. Kitchens, baths, additions, full-home renovations and the thousand small jobs in between. We've seen the surprises behind every wall.",
       "stat": "30+ yrs"
     },
     "honesty": {
@@ -76,7 +76,7 @@
     },
     "clean": {
       "title": "Clean Work",
-      "body": "Drop cloths down, dust barriers up, shoes off at the door. We finish each day with a swept site, and we leave your home cleaner than we walked into.",
+      "body": "Drop cloths down, dust barriers up, shoes off at the door. We finish each day with a swept site, and we leave your home cleaner than we found it.",
       "stat": "Jobsite policy"
     },
     "quote": "They treated our home like it was theirs. Quote was honest, work was clean, and they finished a day early.",
@@ -243,7 +243,7 @@
     "emailButton": "Email us",
     "whatsappButton": "Message us on WhatsApp",
     "visit": "Location",
-    "address": "1637 E. Valley Pkwy #373 Escondido, CA 92027",
+    "address": "1637 E Valley Pkwy #373, Escondido, CA 92027",
     "directions": "View directions →",
     "getInTouch": "Get in touch",
     "phone": "{{phone}}",

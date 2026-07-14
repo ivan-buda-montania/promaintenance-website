@@ -109,7 +109,7 @@ export default function Contact() {
           <div>
             <p className="text-xs uppercase tracking-[0.22em] text-cream-50/55">{t("contact.visit")}</p>
             <address className="mt-4 not-italic text-sm leading-relaxed text-cream-50/85">
-              1637 E. Valley Pkwy<br />
+              1637 E Valley Pkwy<br />
               #373<br />
               Escondido, CA 92027
             </address>

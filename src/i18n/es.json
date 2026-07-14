@@ -101,7 +101,7 @@
         "label": "Comienza a planificar",
         "desc": "Responde algunas preguntas sobre tu espacio",
         "title": "Algunas preguntas rápidas",
-        "body": "Cuéntanos la sala, el alcance aproximado (cosmético vs estructural), tu cronograma ideal y presupuesto aproximado. Enviaremos un plan realista en dos días hábiles.",
+        "body": "Cuéntanos sobre el espacio, el alcance aproximado (cosmético vs estructural), tu cronograma ideal y presupuesto aproximado. Enviaremos un plan realista en dos días hábiles.",
         "cta": "Abre el estimador"
       },
       "upload": {
@@ -148,13 +148,13 @@
     "features": [
       "Sin cargos ocultos, nunca",
       "Presupuesto en 2 días hábiles",
-      "Licenciado, asegurado e indemnizado"
+      "Licenciado, asegurado y afianzado"
     ],
     "step1": {
       "title": "Tu proyecto",
       "service": "Tipo de servicio",
       "selectService": "Selecciona un servicio…",
-      "roomSize": "Tamaño de la sala",
+      "roomSize": "Tamaño del espacio",
       "roomSizeHint": "Ingresa el tamaño aproximado y elige la unidad.",
       "roomSizePlaceholder": "p. ej. 120",
       "roomSizeUnitFt2": "ft²",
@@ -199,7 +199,7 @@
       "linksAdded_other": "{{count}} enlaces añadidos",
       "notes": "Algo más",
       "notesHint": "Opcional. Restricciones, plazos, requisitos específicos.",
-      "notesPlaceholder": "p. ej. Tenemos dos niños y un perro, trabajo de fin de semana está bien, queremos terminado para Acción de Gracias…"
+      "notesPlaceholder": "p. ej. Tenemos dos niños y un perro, trabajo de fin de semana está bien, lo queremos terminado para Acción de Gracias…"
     },
     "step3": {
       "title": "Tu información",
@@ -243,14 +243,14 @@
     "emailButton": "Envía un correo",
     "whatsappButton": "Escríbenos en WhatsApp",
     "visit": "Ubicación",
-    "address": "1637 E. Valley Pkwy #373 Escondido, CA 92027",
+    "address": "1637 E Valley Pkwy #373, Escondido, CA 92027",
     "directions": "Ver direcciones →",
     "getInTouch": "Ponte en contacto",
     "phone": "{{phone}}",
     "email": "{{email}}",
     "mapPreview": "Vista previa del mapa",
     "copyright": "© 2025 Pro Maintenance Corp. Todos los derechos reservados.",
-    "license": "Licenciado · Asegurado · Indemnizado",
+    "license": "Licenciado · Asegurado · Afianzado",
     "instagramLabel": "Síguenos en Instagram",
     "facebookLabel": "Síguenos en Facebook",
     "tiktokLabel": "Síguenos en TikTok",
