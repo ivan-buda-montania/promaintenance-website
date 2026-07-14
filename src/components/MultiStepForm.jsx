@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
@@ -20,7 +20,7 @@ const STYLES = [
   { id: "traditional", label: "Traditional", img: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80" },
 ];
 
-const CONTACT_METHODS = ["WhatsApp", "Call", "Instagram DM"];
+const CONTACT_METHODS = ["SMS", "WhatsApp", "Call"];
 
 const INITIAL = {
   service: "",
@@ -161,12 +161,73 @@ function Field({ label, htmlFor, error, children, hint }) {
 const baseInput =
   "w-full rounded-lg border border-charcoal/15 bg-cream-50 px-4 py-3 text-base text-charcoal placeholder-charcoal/40 transition-colors focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/20";
 
+const SMS_PHONE = "+17604452261";
+const SMS_PHONE_DISPLAY = "+1 760-445-2261";
+const SMS_CHAR_LIMIT = 320;
+
+function capitalize(value) {
+  return value ? value.charAt(0).toUpperCase() + value.slice(1) : "";
+}
+
+function buildSmsMessage(data) {
+  const details = data.notes?.trim() || "";
+  const name = data.name?.trim();
+  const phone = data.phone?.trim();
+  const email = data.email?.trim();
+  const service = data.service?.trim();
+  const address = data.roomSize?.trim();
+  const style = data.style ? capitalize(data.style) : "";
+  const budget = data.budget ? formatBudget(data.budget) : "";
+
+  const baseParts = [
+    "Free Estimate",
+    name ? `Name:${name}` : "",
+    phone ? `Ph:${phone}` : "",
+    email ? `Email:${email}` : "",
+    service ? `Svc:${service}` : "",
+    address ? `Addr:${address}` : "",
+    budget ? `Budget:${budget}` : "",
+    style ? `Style:${style}` : "",
+  ].filter(Boolean);
+
+  if (!details) return baseParts.join(" | ");
+
+  const detailsPart = `Details:${details}`;
+  let message = [...baseParts, detailsPart].join(" | ");
+
+  if (message.length <= SMS_CHAR_LIMIT) return message;
+
+  const baseWithoutDetails = baseParts.join(" | ");
+  const prefix = "Details:";
+  const availableForDetails = Math.max(0, SMS_CHAR_LIMIT - baseWithoutDetails.length - prefix.length - 3);
+  const truncatedDetails = `${details.slice(0, availableForDetails).trimEnd()}...`;
+  const truncatedMessage = `${baseWithoutDetails} | ${prefix}${truncatedDetails}`;
+
+  return truncatedMessage.length > SMS_CHAR_LIMIT
+    ? truncatedMessage.slice(0, SMS_CHAR_LIMIT - 3) + "..."
+    : truncatedMessage;
+}
+
+function buildSmsHref(message) {
+  return `sms:${SMS_PHONE}?body=${encodeURIComponent(message)}`;
+}
+
+function isLikelyMobile() {
+  if (typeof window === "undefined" || !window.navigator) return false;
+  return /android|iphone|ipad|ipod|mobile/i.test(window.navigator.userAgent);
+}
+
 export default function MultiStepForm() {
   const { t } = useTranslation();
   const [step, setStep] = useState(1);
   const [data, setData] = useState(INITIAL);
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [showSmsPrompt, setShowSmsPrompt] = useState(false);
+  const [pendingSmsMessage, setPendingSmsMessage] = useState("");
+  const [isSending, setIsSending] = useState(false);
+  const [desktopNotice, setDesktopNotice] = useState("");
+  const sendTimerRef = useRef(null);
 
   const update = (patch) => setData((d) => ({ ...d, ...patch }));
 
@@ -201,40 +262,51 @@ export default function MultiStepForm() {
     setErrors(errs);
     if (Object.keys(errs).length) return;
 
-    const budgetLabel = data.budget < 5000 ? "Small project" : data.budget < 25000 ? "Mid-range" : data.budget < 75000 ? "Full remodel" : "Whole-home";
+    const message = buildSmsMessage(data);
+    setPendingSmsMessage(message);
+    setDesktopNotice("");
+    setShowSmsPrompt(true);
+    setIsSending(true);
+    if (sendTimerRef.current) clearTimeout(sendTimerRef.current);
+    sendTimerRef.current = window.setTimeout(() => setIsSending(false), 3000);
+  };
 
-    const message = `*Pro Maintenance Corp. — Free Estimate Request*
+  const openSmsApp = () => {
+    if (!isLikelyMobile()) {
+      setShowSmsPrompt(false);
+      setDesktopNotice(`Please open this page on your mobile device to text us, or call us directly at ${SMS_PHONE_DISPLAY}.`);
+      return;
+    }
 
-*Project Details:*
-• Service: ${data.service}
-• Room Size: ${data.roomSize}
-• Budget: $${data.budget.toLocaleString()} (${budgetLabel})
+    const smsUrl = buildSmsHref(pendingSmsMessage);
+    window.location.href = smsUrl;
+    setShowSmsPrompt(false);
+    setSubmitted(true);
+  };
 
-*Vision:*
-• Style: ${data.style.charAt(0).toUpperCase() + data.style.slice(1)}
-${data.photoLinks.length > 0 ? `• Inspiration Photos:\n${data.photoLinks.map((link) => `  ${link}`).join("\n")}` : "• Photos: None"}
-${data.notes ? `• Notes: ${data.notes}` : ""}
+  const sendByEmail = (e) => {
+    if (e && typeof e.preventDefault === "function") e.preventDefault();
+    const errs = validate(3);
+    setErrors(errs);
+    if (Object.keys(errs).length) return;
 
-*Contact Info:*
-• Name: ${data.name}
-• Phone: ${data.phone}
-• Email: ${data.email}
-• Preferred Contact: ${data.contactMethod}`;
-
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://api.whatsapp.com/send/?phone=%2B17604452261&text=${encodedMessage}&type=phone_number&app_absent=0`;
-
-    // eslint-disable-next-line no-console
-    console.log("Redirecting to WhatsApp with message:", message);
-    window.open(whatsappUrl, "_blank");
+    const subject = encodeURIComponent("Free Estimate Request");
+    const body = encodeURIComponent(pendingSmsMessage || buildSmsMessage(data));
+    window.open(`mailto:service@promaintenancecorp.com?subject=${subject}&body=${body}`);
+    setShowSmsPrompt(false);
     setSubmitted(true);
   };
 
   const reset = () => {
+    if (sendTimerRef.current) clearTimeout(sendTimerRef.current);
     setData(INITIAL);
     setStep(1);
     setErrors({});
     setSubmitted(false);
+    setShowSmsPrompt(false);
+    setPendingSmsMessage("");
+    setDesktopNotice("");
+    setIsSending(false);
   };
 
   if (submitted) {
@@ -486,28 +558,96 @@ ${data.notes ? `• Notes: ${data.notes}` : ""}
           )}
         </AnimatePresence>
 
-        <div className="mt-10 flex items-center justify-between gap-3">
-          <button
-            type="button"
-            onClick={back}
-            disabled={step === 1}
-            className="text-sm font-medium text-charcoal/60 hover:text-charcoal disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            {t("estimate.back")}
-          </button>
-
-          {step < 3 ? (
-            <button type="button" onClick={next} className="btn-primary">
-              {t("estimate.continue")}
-            </button>
-          ) : (
-            <button type="submit" className="btn-amber">
-              {t("estimate.submit")}
-              <span aria-hidden="true">→</span>
-            </button>
+        <div className="mt-10 space-y-3">
+          {desktopNotice && (
+            <p className="rounded-lg border border-amber/30 bg-amber/10 px-4 py-3 text-sm text-amber-dark">
+              {desktopNotice}
+            </p>
           )}
+
+          <div className="flex items-center justify-between gap-3">
+            <button
+              type="button"
+              onClick={back}
+              disabled={step === 1}
+              className="text-sm font-medium text-charcoal/60 hover:text-charcoal disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              {t("estimate.back")}
+            </button>
+
+            {step < 3 ? (
+              <button type="button" onClick={next} className="btn-primary">
+                {t("estimate.continue")}
+              </button>
+            ) : (
+              <div className="flex flex-wrap items-center justify-end gap-3">
+                <button
+                  type="button"
+                  onClick={sendByEmail}
+                  className="rounded-lg border border-charcoal/15 px-4 py-3 text-sm font-medium text-charcoal/70 transition-colors hover:bg-cream-100"
+                >
+                  Email instead
+                </button>
+                <button
+                  type="button"
+                  onClick={onSubmit}
+                  disabled={isSending}
+                  className="btn-amber disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {isSending ? "Preparing…" : "Send via SMS"}
+                  <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </form>
+
+      <AnimatePresence>
+        {showSmsPrompt && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-charcoal/50 px-4"
+          >
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="sms-modal-title"
+              initial={{ y: 12, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 12, opacity: 0 }}
+              className="w-full max-w-md rounded-2xl bg-cream-50 p-6 shadow-lift"
+            >
+              <h3 id="sms-modal-title" className="font-display text-2xl text-charcoal">Open your SMS app</h3>
+              <p className="mt-3 text-sm leading-6 text-charcoal/70">
+                Your SMS app will open with your request pre-filled. Review the message and tap Send to complete your request.
+              </p>
+              <div className="mt-6 flex flex-wrap justify-end gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (sendTimerRef.current) clearTimeout(sendTimerRef.current);
+                    setIsSending(false);
+                    setShowSmsPrompt(false);
+                  }}
+                  className="rounded-lg border border-charcoal/15 px-4 py-3 text-sm font-medium text-charcoal/70 transition-colors hover:bg-cream-100"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={openSmsApp}
+                  className="btn-amber"
+                >
+                  Open SMS
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
