@@ -80,7 +80,17 @@
       "stat": "Política del sitio"
     },
     "quote": "Trataron nuestro hogar como si fuera el de ellos. El presupuesto fue honesto, el trabajo fue limpio, y terminaron un día antes.",
-    "author": "— María R., Remodelación de cocina · 2025"
+    "author": "— María R., Remodelación de cocina · 2025",
+    "business": {
+      "heading": "Con licencia y registrada",
+      "legalName": "TECMIL AC SOLUTIONS",
+      "dbaLabel": "DBA",
+      "dbaValue": "Pro Maintenance",
+      "licenseLabel": "Licencia #",
+      "licenseValue": "1131567",
+      "addressLine1": "1637 E Valley Pkwy #373",
+      "addressLine2": "Escondido, CA 92027"
+    }
   },
   "planner": {
     "title": "Diseña tu proyecto de ensueño en minutos.",
@@ -145,25 +155,48 @@
       "service": "Tipo de servicio",
       "selectService": "Selecciona un servicio…",
       "roomSize": "Tamaño de la sala",
-      "roomSizeHint": "Pies cuadrados, o una descripción aproximada (p. ej., baño pequeño).",
-      "roomSizePlaceholder": "p. ej. 120 pies² / cocina mediana",
+      "roomSizeHint": "Ingresa el tamaño aproximado y elige la unidad.",
+      "roomSizePlaceholder": "p. ej. 120",
+      "roomSizeUnitFt2": "ft²",
+      "roomSizeUnitM2": "m²",
       "budget": "Presupuesto aproximado",
       "budgetLabel": {
         "small": "Proyecto pequeño",
         "midRange": "Rango medio",
         "fullRemodel": "Remodelación completa",
         "wholeHome": "Casa entera"
+      },
+      "services": {
+        "kitchenRemodel": "Remodelación de cocina",
+        "bathroomRemodel": "Remodelación de baño",
+        "drywall": "Drywall",
+        "painting": "Pintura",
+        "flooring": "Pisos",
+        "windows": "Ventanas",
+        "carpentry": "Carpintería",
+        "generalRepairs": "Reparaciones generales"
       }
     },
     "step2": {
       "title": "Tu visión",
       "style": "Estilo deseado",
+      "styles": {
+        "modern": "Moderno",
+        "rustic": "Rústico",
+        "minimalist": "Minimalista",
+        "traditional": "Tradicional",
+        "other": "Otro"
+      },
       "photos": "Enlaces de fotos de inspiración",
+      "optional": "Opcional",
       "photosHint": "Google Fotos, Google Drive, Dropbox — cualquier URL de imagen compartible.",
       "photoPlaceholder": "https://photos.google.com/share/...",
       "photoError": "Por favor, ingresa una URL válida que comience con http:// o https://",
       "photoDuplicate": "Este enlace ya está en la lista.",
       "addLink": "Añadir",
+      "removeLink": "Eliminar enlace {{index}}",
+      "linksAdded_one": "{{count}} enlace añadido",
+      "linksAdded_other": "{{count}} enlaces añadidos",
       "notes": "Algo más",
       "notesHint": "Opcional. Restricciones, plazos, requisitos específicos.",
       "notesPlaceholder": "p. ej. Tenemos dos niños y un perro, trabajo de fin de semana está bien, queremos terminado para Acción de Gracias…"
@@ -177,6 +210,7 @@
       "email": "Correo electrónico",
       "emailPlaceholder": "tu@email.com",
       "contactMethod": "Método de contacto preferido",
+      "sms": "SMS",
       "whatsapp": "WhatsApp",
       "call": "Llamada",
       "instagram": "DM de Instagram"
@@ -184,6 +218,18 @@
     "submit": "Enviar presupuesto gratis",
     "back": "← Atrás",
     "continue": "Continuar →",
+    "sendSms": "Enviar por SMS",
+    "preparing": "Preparando…",
+    "smsModal": {
+      "title": "Abre tu app de SMS",
+      "body": "Tu app de SMS se abrirá con tu solicitud prellenada. Revisa el mensaje y toca Enviar para completar tu solicitud.",
+      "cancel": "Cancelar",
+      "openSms": "Abrir SMS",
+      "qrTitle": "Escanea para enviar",
+      "qrBody": "Escanea este código QR con la cámara de tu teléfono. Tu app de SMS se abrirá con la solicitud prellenada — solo toca Enviar.",
+      "qrFallback": "¿Prefieres llamar? Comunícate con nosotros al {{phone}}.",
+      "close": "Cerrar"
+    },
     "success": {
       "title": "Lo tenemos, {{name}}.",
       "subtitle": "Revisaremos tu proyecto y nos comunicaremos con {{method}} en dos días hábiles con un plan y presupuesto.",

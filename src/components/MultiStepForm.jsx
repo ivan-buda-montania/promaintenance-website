@@ -1,16 +1,17 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { QRCodeSVG } from "qrcode.react";
 
 const SERVICES = [
-  "Kitchen Remodel",
-  "Bathroom Remodel",
-  "Drywall",
-  "Painting",
-  "Flooring",
-  "Windows",
-  "Carpentry",
-  "General Repairs",
+  { id: "kitchenRemodel", label: "Kitchen Remodel" },
+  { id: "bathroomRemodel", label: "Bathroom Remodel" },
+  { id: "drywall", label: "Drywall" },
+  { id: "painting", label: "Painting" },
+  { id: "flooring", label: "Flooring" },
+  { id: "windows", label: "Windows" },
+  { id: "carpentry", label: "Carpentry" },
+  { id: "generalRepairs", label: "General Repairs" },
 ];
 
 const STYLES = [
@@ -18,13 +19,24 @@ const STYLES = [
   { id: "rustic",      label: "Rustic",      img: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600&q=80" },
   { id: "minimalist",  label: "Minimalist",  img: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&q=80" },
   { id: "traditional", label: "Traditional", img: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80" },
+  { id: "other",       label: "Other",       img: null },
 ];
 
-const CONTACT_METHODS = ["SMS", "WhatsApp", "Call"];
+const CONTACT_METHODS = [
+  { id: "SMS", key: "sms" },
+  { id: "Call", key: "call" },
+  { id: "WhatsApp", key: "whatsapp" },
+];
+
+const ROOM_SIZE_UNITS = [
+  { id: "ft2", key: "roomSizeUnitFt2", symbol: "ft²" },
+  { id: "m2", key: "roomSizeUnitM2", symbol: "m²" },
+];
 
 const INITIAL = {
   service: "",
   roomSize: "",
+  roomSizeUnit: "ft2",
   budget: 15000,
   style: "",
   photoLinks: [],
@@ -40,23 +52,24 @@ function formatBudget(n) {
 }
 
 function PhotoLinksInput({ links, onChange }) {
+  const { t } = useTranslation();
   const [draft, setDraft] = useState("");
-  const [error, setError] = useState("");
+  const [errorKey, setErrorKey] = useState("");
 
   const addLink = () => {
     const trimmed = draft.trim();
     if (!trimmed) return;
     if (!/^https?:\/\/.+/.test(trimmed)) {
-      setError("Please enter a valid URL starting with http:// or https://");
+      setErrorKey("estimate.step2.photoError");
       return;
     }
     if (links.includes(trimmed)) {
-      setError("This link is already in the list.");
+      setErrorKey("estimate.step2.photoDuplicate");
       return;
     }
     onChange([...links, trimmed]);
     setDraft("");
-    setError("");
+    setErrorKey("");
   };
 
   const removeLink = (index) => onChange(links.filter((_, i) => i !== index));
@@ -68,20 +81,20 @@ function PhotoLinksInput({ links, onChange }) {
   return (
     <div>
       <span className="block text-xs font-medium uppercase tracking-[0.18em] text-charcoal/70">
-        Inspiration photo links
-        <span className="ml-2 normal-case text-charcoal/45">Optional</span>
+        {t("estimate.step2.photos")}
+        <span className="ml-2 normal-case text-charcoal/45">{t("estimate.step2.optional")}</span>
       </span>
       <p className="mt-1 text-xs text-charcoal/50">
-        Google Photos, Google Drive, Dropbox — any shareable image URL.
+        {t("estimate.step2.photosHint")}
       </p>
 
       <div className="mt-3 flex gap-2">
         <input
           type="url"
           value={draft}
-          onChange={(e) => { setDraft(e.target.value); setError(""); }}
+          onChange={(e) => { setDraft(e.target.value); setErrorKey(""); }}
           onKeyDown={onKeyDown}
-          placeholder="https://photos.google.com/share/..."
+          placeholder={t("estimate.step2.photoPlaceholder")}
           className={`${baseInput} flex-1`}
           aria-label="Photo link URL"
         />
@@ -93,11 +106,11 @@ function PhotoLinksInput({ links, onChange }) {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-4 w-4" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14M5 12h14" />
           </svg>
-          Add
+          {t("estimate.step2.addLink")}
         </button>
       </div>
 
-      {error && <p className="mt-1.5 text-xs text-amber-dark">{error}</p>}
+      {errorKey && <p className="mt-1.5 text-xs text-amber-dark">{t(errorKey)}</p>}
 
       <AnimatePresence initial={false}>
         {links.length > 0 && (
@@ -123,7 +136,7 @@ function PhotoLinksInput({ links, onChange }) {
                 <button
                   type="button"
                   onClick={() => removeLink(i)}
-                  aria-label={`Remove link ${i + 1}`}
+                  aria-label={t("estimate.step2.removeLink", { index: i + 1 })}
                   className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-charcoal/40 transition-colors hover:bg-amber/15 hover:text-amber-dark"
                 >
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-3.5 w-3.5" aria-hidden="true">
@@ -138,7 +151,7 @@ function PhotoLinksInput({ links, onChange }) {
 
       {links.length > 0 && (
         <p className="mt-2 text-xs text-sage-dark">
-          {links.length} link{links.length !== 1 ? "s" : ""} added
+          {t("estimate.step2.linksAdded", { count: links.length })}
         </p>
       )}
     </div>
@@ -174,34 +187,35 @@ function buildSmsMessage(data) {
   const name = data.name?.trim();
   const phone = data.phone?.trim();
   const email = data.email?.trim();
-  const service = data.service?.trim();
-  const address = data.roomSize?.trim();
+  const service = data.service ? SERVICES.find((s) => s.id === data.service)?.label ?? data.service : "";
+  const roomSizeValue = data.roomSize?.trim();
+  const unitSymbol = ROOM_SIZE_UNITS.find((u) => u.id === data.roomSizeUnit)?.symbol ?? "";
+  const address = roomSizeValue ? `${roomSizeValue} ${unitSymbol}`.trim() : "";
   const style = data.style ? capitalize(data.style) : "";
   const budget = data.budget ? formatBudget(data.budget) : "";
 
-  const baseParts = [
-    "Free Estimate",
-    name ? `Name:${name}` : "",
-    phone ? `Ph:${phone}` : "",
-    email ? `Email:${email}` : "",
-    service ? `Svc:${service}` : "",
-    address ? `Addr:${address}` : "",
-    budget ? `Budget:${budget}` : "",
-    style ? `Style:${style}` : "",
+  const header = "Free Estimate Request";
+  const fields = [
+    name ? `Name: ${name}` : "",
+    phone ? `Phone: ${phone}` : "",
+    email ? `Email: ${email}` : "",
+    service ? `Service: ${service}` : "",
+    address ? `Size: ${address}` : "",
+    budget ? `Budget: ${budget}` : "",
+    style ? `Style: ${style}` : "",
   ].filter(Boolean);
 
-  if (!details) return baseParts.join(" | ");
+  const base = `${header}\n\n${fields.join("\n")}`;
 
-  const detailsPart = `Details:${details}`;
-  let message = [...baseParts, detailsPart].join(" | ");
+  if (!details) return base;
 
+  const message = `${base}\n\nDetails:\n${details}`;
   if (message.length <= SMS_CHAR_LIMIT) return message;
 
-  const baseWithoutDetails = baseParts.join(" | ");
-  const prefix = "Details:";
-  const availableForDetails = Math.max(0, SMS_CHAR_LIMIT - baseWithoutDetails.length - prefix.length - 3);
+  const detailsPrefix = "\n\nDetails:\n";
+  const availableForDetails = Math.max(0, SMS_CHAR_LIMIT - base.length - detailsPrefix.length - 3);
   const truncatedDetails = `${details.slice(0, availableForDetails).trimEnd()}...`;
-  const truncatedMessage = `${baseWithoutDetails} | ${prefix}${truncatedDetails}`;
+  const truncatedMessage = `${base}${detailsPrefix}${truncatedDetails}`;
 
   return truncatedMessage.length > SMS_CHAR_LIMIT
     ? truncatedMessage.slice(0, SMS_CHAR_LIMIT - 3) + "..."
@@ -226,8 +240,12 @@ export default function MultiStepForm() {
   const [showSmsPrompt, setShowSmsPrompt] = useState(false);
   const [pendingSmsMessage, setPendingSmsMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
-  const [desktopNotice, setDesktopNotice] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
   const sendTimerRef = useRef(null);
+
+  useEffect(() => {
+    setIsMobile(isLikelyMobile());
+  }, []);
 
   const update = (patch) => setData((d) => ({ ...d, ...patch }));
 
@@ -264,7 +282,6 @@ export default function MultiStepForm() {
 
     const message = buildSmsMessage(data);
     setPendingSmsMessage(message);
-    setDesktopNotice("");
     setShowSmsPrompt(true);
     setIsSending(true);
     if (sendTimerRef.current) clearTimeout(sendTimerRef.current);
@@ -272,27 +289,8 @@ export default function MultiStepForm() {
   };
 
   const openSmsApp = () => {
-    if (!isLikelyMobile()) {
-      setShowSmsPrompt(false);
-      setDesktopNotice(`Please open this page on your mobile device to text us, or call us directly at ${SMS_PHONE_DISPLAY}.`);
-      return;
-    }
-
     const smsUrl = buildSmsHref(pendingSmsMessage);
     window.location.href = smsUrl;
-    setShowSmsPrompt(false);
-    setSubmitted(true);
-  };
-
-  const sendByEmail = (e) => {
-    if (e && typeof e.preventDefault === "function") e.preventDefault();
-    const errs = validate(3);
-    setErrors(errs);
-    if (Object.keys(errs).length) return;
-
-    const subject = encodeURIComponent("Free Estimate Request");
-    const body = encodeURIComponent(pendingSmsMessage || buildSmsMessage(data));
-    window.open(`mailto:service@promaintenancecorp.com?subject=${subject}&body=${body}`);
     setShowSmsPrompt(false);
     setSubmitted(true);
   };
@@ -305,11 +303,11 @@ export default function MultiStepForm() {
     setSubmitted(false);
     setShowSmsPrompt(false);
     setPendingSmsMessage("");
-    setDesktopNotice("");
     setIsSending(false);
   };
 
   if (submitted) {
+    const contactMethodLabel = CONTACT_METHODS.find((m) => m.id === data.contactMethod)?.key;
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
@@ -326,7 +324,7 @@ export default function MultiStepForm() {
           {t("estimate.success.title", { name: data.name.split(" ")[0] })}
         </h3>
         <p className="mx-auto mt-3 max-w-md text-charcoal/70">
-          {t("estimate.success.subtitle", { method: data.contactMethod })}
+          {t("estimate.success.subtitle", { method: contactMethodLabel ? t(`estimate.step3.${contactMethodLabel}`) : data.contactMethod })}
         </p>
         <button type="button" onClick={reset} className="mt-8 btn-primary">
           {t("estimate.success.restart")}
@@ -355,9 +353,9 @@ export default function MultiStepForm() {
           ))}
         </div>
         <div className="mt-4 grid grid-cols-3 text-[10px] uppercase tracking-[0.2em] text-charcoal/55">
-          <span className={step === 1 ? "text-amber" : ""}>Your project</span>
-          <span className={`text-center ${step === 2 ? "text-amber" : ""}`}>Your vision</span>
-          <span className={`text-right ${step === 3 ? "text-amber" : ""}`}>Your info</span>
+          <span className={step === 1 ? "text-amber" : ""}>{t("estimate.step1.title")}</span>
+          <span className={`text-center ${step === 2 ? "text-amber" : ""}`}>{t("estimate.step2.title")}</span>
+          <span className={`text-right ${step === 3 ? "text-amber" : ""}`}>{t("estimate.step3.title")}</span>
         </div>
       </div>
 
@@ -380,41 +378,63 @@ export default function MultiStepForm() {
                   className={baseInput}
                 >
                   <option value="">{t("estimate.step1.selectService")}</option>
-                  {SERVICES.map((s) => <option key={s} value={s}>{s}</option>)}
+                  {SERVICES.map((s) => (
+                    <option key={s.id} value={s.id}>{t(`estimate.step1.services.${s.id}`, s.label)}</option>
+                  ))}
                 </select>
               </Field>
 
               <Field label={t("estimate.step1.roomSize")} htmlFor="size" error={errors.roomSize} hint={t("estimate.step1.roomSizeHint")}>
-                <input
-                  id="size"
-                  type="text"
-                  value={data.roomSize}
-                  onChange={(e) => update({ roomSize: e.target.value })}
-                  placeholder={t("estimate.step1.roomSizePlaceholder")}
-                  className={baseInput}
-                />
+                <div className="flex gap-2">
+                  <input
+                    id="size"
+                    type="text"
+                    inputMode="numeric"
+                    value={data.roomSize}
+                    onChange={(e) => update({ roomSize: e.target.value })}
+                    placeholder={t("estimate.step1.roomSizePlaceholder")}
+                    className={`${baseInput} min-w-0 flex-1`}
+                  />
+                  <select
+                    id="size-unit"
+                    value={data.roomSizeUnit}
+                    onChange={(e) => update({ roomSizeUnit: e.target.value })}
+                    aria-label={t("estimate.step1.roomSize")}
+                    className={`${baseInput} w-20 shrink-0`}
+                  >
+                    {ROOM_SIZE_UNITS.map((u) => (
+                      <option key={u.id} value={u.id}>{t(`estimate.step1.${u.key}`, u.symbol)}</option>
+                    ))}
+                  </select>
+                </div>
               </Field>
 
-              <Field label="Approximate budget" htmlFor="budget">
+              <Field label={t("estimate.step1.budget")} htmlFor="budget">
                 <div className="flex items-center justify-between">
                   <span className="font-display text-2xl text-charcoal">{formatBudget(data.budget)}</span>
                   <span className="text-xs uppercase tracking-[0.18em] text-charcoal/50">
-                    {data.budget < 5000 ? "Small project" : data.budget < 25000 ? "Mid-range" : data.budget < 75000 ? "Full remodel" : "Whole-home"}
+                    {data.budget < 5000
+                      ? t("estimate.step1.budgetLabel.small")
+                      : data.budget < 25000
+                      ? t("estimate.step1.budgetLabel.midRange")
+                      : data.budget < 75000
+                      ? t("estimate.step1.budgetLabel.fullRemodel")
+                      : t("estimate.step1.budgetLabel.wholeHome")}
                   </span>
                 </div>
                 <input
                   id="budget"
                   type="range"
-                  min={1000}
-                  max={150000}
+                  min={500}
+                  max={100000}
                   step={500}
                   value={data.budget}
                   onChange={(e) => update({ budget: Number(e.target.value) })}
                   className="mt-3 w-full accent-amber"
                 />
                 <div className="mt-1 flex justify-between text-[10px] uppercase tracking-[0.18em] text-charcoal/40">
-                  <span>$1K</span>
-                  <span>$150K+</span>
+                  <span>$500</span>
+                  <span>$100K+</span>
                 </div>
               </Field>
             </motion.div>
@@ -431,11 +451,12 @@ export default function MultiStepForm() {
             >
               <div>
                 <span className="block text-xs font-medium uppercase tracking-[0.18em] text-charcoal/70">
-                  Desired style
+                  {t("estimate.step2.style")}
                 </span>
                 <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
                   {STYLES.map((style) => {
                     const active = data.style === style.id;
+                    const styleLabel = t(`estimate.step2.styles.${style.id}`, style.label);
                     return (
                       <label
                         key={style.id}
@@ -451,11 +472,19 @@ export default function MultiStepForm() {
                           onChange={() => update({ style: style.id })}
                           className="sr-only"
                         />
-                        <img src={style.img} alt={style.label} className="aspect-square w-full object-cover" />
+                        {style.img ? (
+                          <img src={style.img} alt={styleLabel} className="aspect-square w-full object-cover" />
+                        ) : (
+                          <div className="flex aspect-square w-full items-center justify-center bg-gradient-to-br from-cream-100 to-cream-200">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-8 w-8 text-charcoal/30" aria-hidden="true">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14M5 12h14" />
+                            </svg>
+                          </div>
+                        )}
                         <div className={`absolute inset-x-0 bottom-0 px-3 py-2 text-xs font-medium uppercase tracking-[0.18em] ${
                           active ? "bg-amber text-cream-50" : "bg-charcoal/70 text-cream-50"
                         }`}>
-                          {style.label}
+                          {styleLabel}
                         </div>
                       </label>
                     );
@@ -469,13 +498,13 @@ export default function MultiStepForm() {
                 onChange={(links) => update({ photoLinks: links })}
               />
 
-              <Field label="Anything else" htmlFor="notes" hint="Optional. Constraints, deadlines, specific must-haves.">
+              <Field label={t("estimate.step2.notes")} htmlFor="notes" hint={t("estimate.step2.notesHint")}>
                 <textarea
                   id="notes"
                   rows={4}
                   value={data.notes}
                   onChange={(e) => update({ notes: e.target.value })}
-                  placeholder="e.g. We have two kids and a dog, weekend work is fine, we want it done by Thanksgiving…"
+                  placeholder={t("estimate.step2.notesPlaceholder")}
                   className={baseInput}
                 />
               </Field>
@@ -491,48 +520,48 @@ export default function MultiStepForm() {
               transition={{ duration: 0.35 }}
               className="space-y-6"
             >
-              <Field label="Name" htmlFor="name" error={errors.name}>
+              <Field label={t("estimate.step3.name")} htmlFor="name" error={errors.name}>
                 <input
                   id="name" type="text"
                   value={data.name}
                   onChange={(e) => update({ name: e.target.value })}
                   className={baseInput}
-                  placeholder="First and last name"
+                  placeholder={t("estimate.step3.namePlaceholder")}
                 />
               </Field>
 
               <div className="grid gap-6 sm:grid-cols-2">
-                <Field label="Phone" htmlFor="phone" error={errors.phone}>
+                <Field label={t("estimate.step3.phone")} htmlFor="phone" error={errors.phone}>
                   <input
                     id="phone" type="tel"
                     value={data.phone}
                     onChange={(e) => update({ phone: e.target.value })}
                     className={baseInput}
-                    placeholder="(555) 010-0123"
+                    placeholder={t("estimate.step3.phonePlaceholder")}
                   />
                 </Field>
 
-                <Field label="Email" htmlFor="email" error={errors.email}>
+                <Field label={t("estimate.step3.email")} htmlFor="email" error={errors.email}>
                   <input
                     id="email" type="email"
                     value={data.email}
                     onChange={(e) => update({ email: e.target.value })}
                     className={baseInput}
-                    placeholder="you@email.com"
+                    placeholder={t("estimate.step3.emailPlaceholder")}
                   />
                 </Field>
               </div>
 
               <div>
                 <span className="block text-xs font-medium uppercase tracking-[0.18em] text-charcoal/70">
-                  Preferred contact method
+                  {t("estimate.step3.contactMethod")}
                 </span>
                 <div className="mt-3 grid grid-cols-3 gap-2">
                   {CONTACT_METHODS.map((m) => {
-                    const active = data.contactMethod === m;
+                    const active = data.contactMethod === m.id;
                     return (
                       <label
-                        key={m}
+                        key={m.id}
                         className={`cursor-pointer rounded-lg border px-4 py-3 text-center text-sm font-medium transition-all ${
                           active
                             ? "border-amber bg-amber/10 text-amber-dark"
@@ -542,12 +571,12 @@ export default function MultiStepForm() {
                         <input
                           type="radio"
                           name="contactMethod"
-                          value={m}
+                          value={m.id}
                           checked={active}
-                          onChange={() => update({ contactMethod: m })}
+                          onChange={() => update({ contactMethod: m.id })}
                           className="sr-only"
                         />
-                        {m}
+                        {t(`estimate.step3.${m.key}`)}
                       </label>
                     );
                   })}
@@ -559,12 +588,6 @@ export default function MultiStepForm() {
         </AnimatePresence>
 
         <div className="mt-10 space-y-3">
-          {desktopNotice && (
-            <p className="rounded-lg border border-amber/30 bg-amber/10 px-4 py-3 text-sm text-amber-dark">
-              {desktopNotice}
-            </p>
-          )}
-
           <div className="flex items-center justify-between gap-3">
             <button
               type="button"
@@ -583,18 +606,11 @@ export default function MultiStepForm() {
               <div className="flex flex-wrap items-center justify-end gap-3">
                 <button
                   type="button"
-                  onClick={sendByEmail}
-                  className="rounded-lg border border-charcoal/15 px-4 py-3 text-sm font-medium text-charcoal/70 transition-colors hover:bg-cream-100"
-                >
-                  Email instead
-                </button>
-                <button
-                  type="button"
                   onClick={onSubmit}
                   disabled={isSending}
                   className="btn-amber disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {isSending ? "Preparing…" : "Send via SMS"}
+                  {isSending ? t("estimate.preparing") : t("estimate.sendSms")}
                   <span aria-hidden="true">→</span>
                 </button>
               </div>
@@ -620,30 +636,68 @@ export default function MultiStepForm() {
               exit={{ y: 12, opacity: 0 }}
               className="w-full max-w-md rounded-2xl bg-cream-50 p-6 shadow-lift"
             >
-              <h3 id="sms-modal-title" className="font-display text-2xl text-charcoal">Open your SMS app</h3>
-              <p className="mt-3 text-sm leading-6 text-charcoal/70">
-                Your SMS app will open with your request pre-filled. Review the message and tap Send to complete your request.
-              </p>
-              <div className="mt-6 flex flex-wrap justify-end gap-3">
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (sendTimerRef.current) clearTimeout(sendTimerRef.current);
-                    setIsSending(false);
-                    setShowSmsPrompt(false);
-                  }}
-                  className="rounded-lg border border-charcoal/15 px-4 py-3 text-sm font-medium text-charcoal/70 transition-colors hover:bg-cream-100"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  onClick={openSmsApp}
-                  className="btn-amber"
-                >
-                  Open SMS
-                </button>
-              </div>
+              {isMobile ? (
+                <>
+                  <h3 id="sms-modal-title" className="font-display text-2xl text-charcoal">{t("estimate.smsModal.title")}</h3>
+                  <p className="mt-3 text-sm leading-6 text-charcoal/70">
+                    {t("estimate.smsModal.body")}
+                  </p>
+                  <div className="mt-6 flex flex-wrap justify-end gap-3">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (sendTimerRef.current) clearTimeout(sendTimerRef.current);
+                        setIsSending(false);
+                        setShowSmsPrompt(false);
+                      }}
+                      className="rounded-lg border border-charcoal/15 px-4 py-3 text-sm font-medium text-charcoal/70 transition-colors hover:bg-cream-100"
+                    >
+                      {t("estimate.smsModal.cancel")}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={openSmsApp}
+                      className="btn-amber"
+                    >
+                      {t("estimate.smsModal.openSms")}
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <h3 id="sms-modal-title" className="font-display text-2xl text-charcoal">{t("estimate.smsModal.qrTitle")}</h3>
+                  <p className="mt-3 text-sm leading-6 text-charcoal/70">
+                    {t("estimate.smsModal.qrBody")}
+                  </p>
+                  <div className="mt-6 flex justify-center">
+                    <div className="rounded-2xl border border-charcoal/10 bg-white p-4 shadow-soft">
+                      <QRCodeSVG
+                        value={buildSmsHref(pendingSmsMessage)}
+                        size={208}
+                        level="M"
+                        marginSize={0}
+                        aria-label={t("estimate.smsModal.qrTitle")}
+                      />
+                    </div>
+                  </div>
+                  <p className="mt-5 text-center text-sm text-charcoal/60">
+                    {t("estimate.smsModal.qrFallback", { phone: SMS_PHONE_DISPLAY })}
+                  </p>
+                  <div className="mt-6 flex justify-end">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (sendTimerRef.current) clearTimeout(sendTimerRef.current);
+                        setIsSending(false);
+                        setShowSmsPrompt(false);
+                      }}
+                      className="rounded-lg border border-charcoal/15 px-4 py-3 text-sm font-medium text-charcoal/70 transition-colors hover:bg-cream-100"
+                    >
+                      {t("estimate.smsModal.close")}
+                    </button>
+                  </div>
+                </>
+              )}
             </motion.div>
           </motion.div>
         )}

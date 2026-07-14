@@ -146,9 +146,22 @@ export default function Contact() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-cream-50/10 pt-8 text-xs text-cream-50/50 sm:flex-row">
-          <p>{t("contact.copyright")}</p>
-          <p>{t("contact.license")}</p>
+        <div className="mt-16 border-t border-cream-50/10 pt-8">
+          <p className="text-center text-sm text-cream-50/70">
+            <span className="font-medium text-cream-50/90">{t("about.business.legalName")}</span>
+            {" · "}
+            {t("about.business.dbaLabel")}: {t("about.business.dbaValue")}
+            {" · "}
+            {t("about.business.licenseLabel")} {t("about.business.licenseValue")}
+          </p>
+          <address className="mt-1 text-center text-sm not-italic text-cream-50/60">
+            {t("about.business.addressLine1")} · {t("about.business.addressLine2")}
+          </address>
+
+          <div className="mt-8 flex flex-col items-center justify-between gap-4 text-xs text-cream-50/50 sm:flex-row">
+            <p>{t("contact.copyright")}</p>
+            <p>{t("contact.license")}</p>
+          </div>
         </div>
       </div>
     </footer>

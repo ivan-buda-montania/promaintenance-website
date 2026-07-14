@@ -80,7 +80,17 @@
       "stat": "Jobsite policy"
     },
     "quote": "They treated our home like it was theirs. Quote was honest, work was clean, and they finished a day early.",
-    "author": "— María R., Kitchen Remodel · 2025"
+    "author": "— María R., Kitchen Remodel · 2025",
+    "business": {
+      "heading": "Licensed & registered",
+      "legalName": "TECMIL AC SOLUTIONS",
+      "dbaLabel": "DBA",
+      "dbaValue": "Pro Maintenance",
+      "licenseLabel": "License #",
+      "licenseValue": "1131567",
+      "addressLine1": "1637 E Valley Pkwy #373",
+      "addressLine2": "Escondido, CA 92027"
+    }
   },
   "planner": {
     "title": "Design your dream project in minutes.",
@@ -145,25 +155,48 @@
       "service": "Service type",
       "selectService": "Select a service…",
       "roomSize": "Room size",
-      "roomSizeHint": "Square feet, or just a rough description (e.g. small bathroom).",
-      "roomSizePlaceholder": "e.g. 120 sq ft / medium kitchen",
+      "roomSizeHint": "Enter the approximate size and choose the unit.",
+      "roomSizePlaceholder": "e.g. 120",
+      "roomSizeUnitFt2": "ft²",
+      "roomSizeUnitM2": "m²",
       "budget": "Approximate budget",
       "budgetLabel": {
         "small": "Small project",
         "midRange": "Mid-range",
         "fullRemodel": "Full remodel",
         "wholeHome": "Whole-home"
+      },
+      "services": {
+        "kitchenRemodel": "Kitchen Remodel",
+        "bathroomRemodel": "Bathroom Remodel",
+        "drywall": "Drywall",
+        "painting": "Painting",
+        "flooring": "Flooring",
+        "windows": "Windows",
+        "carpentry": "Carpentry",
+        "generalRepairs": "General Repairs"
       }
     },
     "step2": {
       "title": "Your vision",
       "style": "Desired style",
+      "styles": {
+        "modern": "Modern",
+        "rustic": "Rustic",
+        "minimalist": "Minimalist",
+        "traditional": "Traditional",
+        "other": "Other"
+      },
       "photos": "Inspiration photo links",
+      "optional": "Optional",
       "photosHint": "Google Photos, Google Drive, Dropbox — any shareable image URL.",
       "photoPlaceholder": "https://photos.google.com/share/...",
       "photoError": "Please enter a valid URL starting with http:// or https://",
       "photoDuplicate": "This link is already in the list.",
       "addLink": "Add",
+      "removeLink": "Remove link {{index}}",
+      "linksAdded_one": "{{count}} link added",
+      "linksAdded_other": "{{count}} links added",
       "notes": "Anything else",
       "notesHint": "Optional. Constraints, deadlines, specific must-haves.",
       "notesPlaceholder": "e.g. We have two kids and a dog, weekend work is fine, we want it done by Thanksgiving…"
@@ -177,6 +210,7 @@
       "email": "Email",
       "emailPlaceholder": "you@email.com",
       "contactMethod": "Preferred contact method",
+      "sms": "SMS",
       "whatsapp": "WhatsApp",
       "call": "Call",
       "instagram": "Instagram DM"
@@ -184,6 +218,18 @@
     "submit": "Send for free estimate",
     "back": "← Back",
     "continue": "Continue →",
+    "sendSms": "Send via SMS",
+    "preparing": "Preparing…",
+    "smsModal": {
+      "title": "Open your SMS app",
+      "body": "Your SMS app will open with your request pre-filled. Review the message and tap Send to complete your request.",
+      "cancel": "Cancel",
+      "openSms": "Open SMS",
+      "qrTitle": "Scan to send",
+      "qrBody": "Scan this QR code with your phone's camera. Your SMS app will open with the request pre-filled — just tap Send.",
+      "qrFallback": "Prefer to call? Reach us at {{phone}}.",
+      "close": "Close"
+    },
     "success": {
       "title": "We've got it, {{name}}.",
       "subtitle": "We'll review your project and reach out via {{method}} within two business days with a plan and a quote.",

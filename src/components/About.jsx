@@ -99,6 +99,30 @@ export default function About() {
             {t("about.author")}
           </footer>
         </motion.blockquote>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mx-auto mt-20 max-w-md rounded-2xl border border-charcoal/15 bg-cream-50 p-8 text-center shadow-soft"
+        >
+          <span className="eyebrow">{t("about.business.heading")}</span>
+          <p className="mt-4 font-display text-2xl text-charcoal">
+            {t("about.business.legalName")}
+          </p>
+          <p className="mt-1 text-charcoal/75">
+            {t("about.business.dbaLabel")}: {t("about.business.dbaValue")}
+          </p>
+          <p className="mt-1 text-charcoal/75">
+            {t("about.business.licenseLabel")} {t("about.business.licenseValue")}
+          </p>
+          <address className="mt-4 not-italic text-sm leading-relaxed text-charcoal/60">
+            {t("about.business.addressLine1")}
+            <br />
+            {t("about.business.addressLine2")}
+          </address>
+        </motion.div>
       </div>
     </section>
   );
