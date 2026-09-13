@@ -8,6 +8,7 @@ const WHATSAPP_URL   = "https://api.whatsapp.com/send/?phone=%2B17604452261&text
 const FACEBOOK_URL   = "https://www.facebook.com/people/Pro-Maintenance/61582208981964/?sfnsn=wa&mibextid=RUbZ1f";
 const INSTAGRAM_URL  = "https://www.instagram.com/promaintenancecorp?utm_source=qru0026igsh%3DZGUzMzM3NWJiOQ%3D%3D";
 const TIKTOK_URL     = "https://www.tiktok.com/@pro.maintenance5?_r=1u0026_t=ZP-93IS7vxvYnn";
+const GOOGLE_REVIEW_URL = "https://g.page/pro-maintenance";
 const MAPS_QUERY     = "1637+E+Valley+Pkwy+%23373+Escondido+CA+92027";
 const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${MAPS_QUERY}`;
 const MAP_EMBED_URL  = `https://www.google.com/maps?q=${MAPS_QUERY}&output=embed`;
@@ -102,6 +103,18 @@ export default function Contact() {
                 <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden="true">
                   <path d="M19.6 6.8a5.4 5.4 0 0 1-3.3-1.1 5.3 5.3 0 0 1-2-3.2h-3v12.7a2.5 2.5 0 1 1-2.5-2.5c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.8 5.6V9.1a8.4 8.4 0 0 0 5.2 1.8V7.9c-.1 0-.1-1.1 0-1.1z" />
                 </svg>
+              </a>
+
+              <a
+                href={GOOGLE_REVIEW_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-cream-50/10 px-4 py-2.5 text-sm font-medium text-cream-50 hover:bg-amber transition-colors"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden="true">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+                {t("contact.reviewCta")}
               </a>
             </div>
           </div>

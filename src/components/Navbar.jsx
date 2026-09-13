@@ -4,10 +4,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import Logo from "./Logo";
 import LanguageToggle from "./LanguageToggle";
+import { useMoodboard } from "../hooks/useMoodboard";
 
 export default function Navbar() {
   const { t } = useTranslation();
   const { pathname } = useLocation();
+  const { pinnedIds } = useMoodboard();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -64,11 +66,16 @@ export default function Navbar() {
             <li key={link.to}>
               <Link
                 to={link.to}
-                className={`relative text-sm font-medium tracking-wide transition-colors duration-300 hover:text-amber ${
+                className={`relative inline-flex items-center gap-1.5 text-sm font-medium tracking-wide transition-colors duration-300 hover:text-amber ${
                   solid ? "text-charcoal/80" : "text-cream-50/90"
                 }`}
               >
                 {link.label}
+                {link.to === "/#moodboard" && pinnedIds.length > 0 && (
+                  <span className="inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-amber px-1 text-[10px] font-semibold text-cream-50">
+                    {pinnedIds.length}
+                  </span>
+                )}
               </Link>
             </li>
           ))}
@@ -125,9 +132,14 @@ export default function Navbar() {
                   <Link
                     to={link.to}
                     onClick={() => setOpen(false)}
-                    className="block rounded-lg px-4 py-3 text-base font-medium text-charcoal/90 hover:bg-cream-200 hover:text-amber transition-colors"
+                    className="flex items-center gap-2 rounded-lg px-4 py-3 text-base font-medium text-charcoal/90 hover:bg-cream-200 hover:text-amber transition-colors"
                   >
                     {link.label}
+                    {link.to === "/#moodboard" && pinnedIds.length > 0 && (
+                      <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-amber px-1.5 text-xs font-semibold text-cream-50">
+                        {pinnedIds.length}
+                      </span>
+                    )}
                   </Link>
                 </li>
               ))}

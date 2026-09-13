@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { moodboardCategories, moodboardItems } from "../data/moodboardItems";
+import { moodboardCategories, moodboardItems, getMoodboardItemsByIds } from "../data/moodboardItems";
 import { useMoodboard } from "../hooks/useMoodboard";
 import NoteBookDrawer from "./NoteBookDrawer";
 
@@ -34,9 +34,7 @@ export default function Moodboard() {
   );
 
   const pinnedItems = useMemo(
-    () => pinnedIds
-      .map((id) => moodboardItems.find((m) => m.id === id))
-      .filter(Boolean),
+    () => getMoodboardItemsByIds(pinnedIds),
     [pinnedIds],
   );
 

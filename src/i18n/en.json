@@ -139,7 +139,8 @@
     },
     "empty": "Pin colors, materials and styles from the moodboard. They'll save here, on your device.",
     "clearAll": "Clear all",
-    "shareWithUs": "Share with us →"
+    "shareWithUs": "Share with us →",
+    "autoFillHint": "These will be added to your request automatically when you continue to the estimate form."
   },
   "estimate": {
     "title": "Three steps. Two business days. Zero pressure.",
@@ -199,7 +200,11 @@
       "linksAdded_other": "{{count}} links added",
       "notes": "Anything else",
       "notesHint": "Optional. Constraints, deadlines, specific must-haves.",
-      "notesPlaceholder": "e.g. We have two kids and a dog, weekend work is fine, we want it done by Thanksgiving…"
+      "notesPlaceholder": "e.g. We have two kids and a dog, weekend work is fine, we want it done by Thanksgiving…",
+      "importedTitle": "From your notebook",
+      "importedBody": "We added {{count}} {{unit}} from your notebook below as inspiration. Remove anything you don't want to send.",
+      "editMoodboard": "Edit in moodboard →",
+      "browseMoodboard": "Haven't picked a look yet? Browse our moodboard for inspiration →"
     },
     "step3": {
       "title": "Your info",
@@ -255,7 +260,8 @@
     "facebookLabel": "Follow on Facebook",
     "tiktokLabel": "Follow on TikTok",
     "emailCta": "Email us",
-    "whatsappCta": "WhatsApp"
+    "whatsappCta": "WhatsApp",
+    "reviewCta": "Review us"
   },
   "validation": {
     "selectService": "Pick a service.",
@@ -279,6 +285,8 @@
       "satoshi": "Pro Maintenance provided fast, efficient, and high-quality service. It's refreshing to work with a company that truly cares about its customers and their homes."
     },
     "cta": "Ready to see the difference quality makes?",
-    "ctaButton": "Start your project"
+    "ctaButton": "Start your project",
+    "reviewButton": "Review us on Google",
+    "reviewNote": "Already worked with us? A quick review helps other homeowners find us."
   }
 }

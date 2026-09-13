@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function NoteBookDrawer({ open, onClose, pinnedItems, onUnpin, onClear }) {
+  const { t } = useTranslation();
+
   useEffect(() => {
     if (!open) return undefined;
     const onKey = (e) => { if (e.key === "Escape") onClose(); };
@@ -40,9 +43,9 @@ export default function NoteBookDrawer({ open, onClose, pinnedItems, onUnpin, on
           >
             <header className="flex items-start justify-between border-b border-charcoal/10 px-6 py-6">
               <div>
-                <span className="eyebrow">My Notebook</span>
+                <span className="eyebrow">{t("moodboard.myNotebook")}</span>
                 <h3 className="mt-2 font-display text-2xl text-charcoal">
-                  {pinnedItems.length} {pinnedItems.length === 1 ? "pin" : "pins"} saved
+                  {pinnedItems.length} {pinnedItems.length === 1 ? t("moodboard.pin") : t("moodboard.pins")} {t("moodboard.saved")}
                 </h3>
               </div>
               <button
@@ -64,8 +67,7 @@ export default function NoteBookDrawer({ open, onClose, pinnedItems, onUnpin, on
                     <path strokeLinecap="round" strokeLinejoin="round" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                   </svg>
                   <p className="mt-4 max-w-xs text-sm">
-                    Pin colors, materials and styles from the moodboard. They'll
-                    save here, on your device.
+                    {t("moodboard.empty")}
                   </p>
                 </div>
               ) : (
@@ -94,17 +96,20 @@ export default function NoteBookDrawer({ open, onClose, pinnedItems, onUnpin, on
             </div>
 
             {pinnedItems.length > 0 && (
-              <footer className="border-t border-charcoal/10 px-6 py-5 flex items-center justify-between gap-3">
-                <button
-                  type="button"
-                  onClick={onClear}
-                  className="text-xs uppercase tracking-[0.18em] text-charcoal/60 hover:text-amber"
-                >
-                  Clear all
-                </button>
-                <Link to="/estimate" onClick={onClose} className="btn-primary !py-2.5 !px-5">
-                  Share with us →
-                </Link>
+              <footer className="border-t border-charcoal/10 px-6 py-5">
+                <p className="text-xs text-charcoal/55">{t("moodboard.autoFillHint")}</p>
+                <div className="mt-3 flex items-center justify-between gap-3">
+                  <button
+                    type="button"
+                    onClick={onClear}
+                    className="text-xs uppercase tracking-[0.18em] text-charcoal/60 hover:text-amber"
+                  >
+                    {t("moodboard.clearAll")}
+                  </button>
+                  <Link to="/estimate" onClick={onClose} className="btn-primary !py-2.5 !px-5">
+                    {t("moodboard.shareWithUs")}
+                  </Link>
+                </div>
               </footer>
             )}
           </motion.aside>

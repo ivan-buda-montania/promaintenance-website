@@ -1,14 +1,23 @@
 import { useCallback, useEffect, useState } from "react";
 
-const STORAGE_KEY = "casaco-moodboard-pins-v1";
+const STORAGE_KEY = "promaintenance-moodboard-pins-v1";
+const LEGACY_STORAGE_KEY = "casaco-moodboard-pins-v1";
 
 function readFromStorage() {
   if (typeof window === "undefined") return [];
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    }
+    // One-time migration from the older, misnamed storage key.
+    const legacyRaw = window.localStorage.getItem(LEGACY_STORAGE_KEY);
+    if (legacyRaw) {
+      const parsed = JSON.parse(legacyRaw);
+      return Array.isArray(parsed) ? parsed : [];
+    }
+    return [];
   } catch {
     return [];
   }

@@ -139,7 +139,8 @@
     },
     "empty": "Fija colores, materiales y estilos del moodboard. Se guardarán aquí, en tu dispositivo.",
     "clearAll": "Limpiar todo",
-    "shareWithUs": "Comparte con nosotros →"
+    "shareWithUs": "Comparte con nosotros →",
+    "autoFillHint": "Se agregarán a tu solicitud automáticamente cuando continúes al formulario de presupuesto."
   },
   "estimate": {
     "title": "Tres pasos. Dos días hábiles. Cero presión.",
@@ -199,7 +200,11 @@
       "linksAdded_other": "{{count}} enlaces añadidos",
       "notes": "Algo más",
       "notesHint": "Opcional. Restricciones, plazos, requisitos específicos.",
-      "notesPlaceholder": "p. ej. Tenemos dos niños y un perro, trabajo de fin de semana está bien, lo queremos terminado para Acción de Gracias…"
+      "notesPlaceholder": "p. ej. Tenemos dos niños y un perro, trabajo de fin de semana está bien, lo queremos terminado para Acción de Gracias…",
+      "importedTitle": "De tu cuaderno",
+      "importedBody": "Agregamos {{count}} {{unit}} de tu cuaderno abajo como inspiración. Elimina lo que no quieras enviar.",
+      "editMoodboard": "Editar en el moodboard →",
+      "browseMoodboard": "¿Aún no eliges un estilo? Explora nuestro moodboard para inspirarte →"
     },
     "step3": {
       "title": "Tu información",
@@ -255,7 +260,8 @@
     "facebookLabel": "Síguenos en Facebook",
     "tiktokLabel": "Síguenos en TikTok",
     "emailCta": "Envía un correo",
-    "whatsappCta": "WhatsApp"
+    "whatsappCta": "WhatsApp",
+    "reviewCta": "Déjanos tu reseña"
   },
   "validation": {
     "selectService": "Elige un servicio.",
@@ -279,6 +285,8 @@
       "satoshi": "Pro Maintenance proporcionó un servicio rápido, eficiente y de alta calidad. Es reconfortante trabajar con una empresa que realmente se preocupa por sus clientes y sus hogares."
     },
     "cta": "¿Listo para ver la diferencia que hace la calidad?",
-    "ctaButton": "Comienza tu proyecto"
+    "ctaButton": "Comienza tu proyecto",
+    "reviewButton": "Danos tu reseña en Google",
+    "reviewNote": "¿Ya trabajaste con nosotros? Una reseña rápida ayuda a que otros propietarios nos encuentren."
   }
 }

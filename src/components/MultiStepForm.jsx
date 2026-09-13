@@ -1,7 +1,10 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { QRCodeSVG } from "qrcode.react";
+import { useMoodboard } from "../hooks/useMoodboard";
+import { getMoodboardItemsByIds } from "../data/moodboardItems";
 
 const SERVICES = [
   { id: "kitchenRemodel", label: "Kitchen Remodel" },
@@ -49,6 +52,24 @@ const INITIAL = {
 
 function formatBudget(n) {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
+}
+
+function styleIdFromMoodboardPicks(pinnedItems) {
+  const stylePick = pinnedItems.find((item) => item.category === "Styles");
+  if (!stylePick) return "";
+  const title = stylePick.title.toLowerCase();
+  const match = STYLES.find((s) => title.includes(s.id));
+  return match ? match.id : "";
+}
+
+function buildInitialData(pinnedItems) {
+  if (pinnedItems.length === 0) return INITIAL;
+  return {
+    ...INITIAL,
+    photoLinks: [...new Set(pinnedItems.map((item) => item.img))],
+    notes: `From my notebook: ${pinnedItems.map((item) => `${item.title} (${item.category})`).join(", ")}`,
+    style: styleIdFromMoodboardPicks(pinnedItems),
+  };
 }
 
 function PhotoLinksInput({ links, onChange }) {
@@ -233,8 +254,10 @@ function isLikelyMobile() {
 
 export default function MultiStepForm() {
   const { t } = useTranslation();
+  const { pinnedIds, clearAll: clearMoodboard } = useMoodboard();
+  const pinnedItems = useMemo(() => getMoodboardItemsByIds(pinnedIds), [pinnedIds]);
   const [step, setStep] = useState(1);
-  const [data, setData] = useState(INITIAL);
+  const [data, setData] = useState(() => buildInitialData(pinnedItems));
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [showSmsPrompt, setShowSmsPrompt] = useState(false);
@@ -293,6 +316,7 @@ export default function MultiStepForm() {
     window.location.href = smsUrl;
     setShowSmsPrompt(false);
     setSubmitted(true);
+    clearMoodboard();
   };
 
   const reset = () => {
@@ -449,6 +473,48 @@ export default function MultiStepForm() {
               transition={{ duration: 0.35 }}
               className="space-y-7"
             >
+              {pinnedItems.length > 0 ? (
+                <div className="rounded-xl border border-amber/25 bg-amber/5 p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-medium uppercase tracking-[0.18em] text-amber-dark">
+                        {t("estimate.step2.importedTitle")}
+                      </p>
+                      <p className="mt-1 text-sm text-charcoal/70">
+                        {t("estimate.step2.importedBody", {
+                          count: pinnedItems.length,
+                          unit: pinnedItems.length === 1 ? t("moodboard.pin") : t("moodboard.pins"),
+                        })}
+                      </p>
+                    </div>
+                    <Link
+                      to="/#moodboard"
+                      className="shrink-0 whitespace-nowrap text-xs font-medium text-amber-dark hover:underline"
+                    >
+                      {t("estimate.step2.editMoodboard")}
+                    </Link>
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {pinnedItems.map((item) => (
+                      <img
+                        key={item.id}
+                        src={item.img}
+                        alt={item.title}
+                        title={`${item.title} (${item.category})`}
+                        className="h-12 w-12 rounded-lg object-cover"
+                      />
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  to="/#moodboard"
+                  className="block text-xs font-medium text-charcoal/55 hover:text-amber-dark"
+                >
+                  {t("estimate.step2.browseMoodboard")}
+                </Link>
+              )}
+
               <div>
                 <span className="block text-xs font-medium uppercase tracking-[0.18em] text-charcoal/70">
                   {t("estimate.step2.style")}

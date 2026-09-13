@@ -51,3 +51,9 @@ export const moodboardItems = [
   { id: "l3", category: "Lighting", title: "Recessed Wash",    img: "https://images.unsplash.com/photo-1615529182904-14819c35db37?w=800&q=80" },
   { id: "l4", category: "Lighting", title: "Statement Chandelier", img: "https://images.unsplash.com/photo-1604147706283-d7119b5b822c?w=800&q=80" },
 ];
+
+export function getMoodboardItemsByIds(ids) {
+  return ids
+    .map((id) => moodboardItems.find((item) => item.id === id))
+    .filter(Boolean);
+}
