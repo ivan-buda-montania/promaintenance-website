@@ -263,6 +263,12 @@
     "whatsappCta": "WhatsApp",
     "reviewCta": "Déjanos tu reseña"
   },
+  "estimateWidget": {
+    "open": "Obtén un presupuesto gratis",
+    "close": "Cerrar formulario de presupuesto",
+    "title": "Presupuesto gratis",
+    "subtitle": "Tres pasos rápidos. Respondemos en dos días hábiles."
+  },
   "validation": {
     "selectService": "Elige un servicio.",
     "enterRoomSize": "Cuéntanos el tamaño, aunque sea aproximado.",

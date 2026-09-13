@@ -116,7 +116,7 @@ function PhotoLinksInput({ links, onChange }) {
           onChange={(e) => { setDraft(e.target.value); setErrorKey(""); }}
           onKeyDown={onKeyDown}
           placeholder={t("estimate.step2.photoPlaceholder")}
-          className={`${baseInput} flex-1`}
+          className={`${baseInput} min-w-0 flex-1`}
           aria-label="Photo link URL"
         />
         <button
@@ -252,7 +252,7 @@ function isLikelyMobile() {
   return /android|iphone|ipad|ipod|mobile/i.test(window.navigator.userAgent);
 }
 
-export default function MultiStepForm() {
+export default function MultiStepForm({ embedded = false }) {
   const { t } = useTranslation();
   const { pinnedIds, clearAll: clearMoodboard } = useMoodboard();
   const pinnedItems = useMemo(() => getMoodboardItemsByIds(pinnedIds), [pinnedIds]);
@@ -337,7 +337,7 @@ export default function MultiStepForm() {
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="rounded-3xl bg-cream-50 p-10 text-center shadow-lift sm:p-14"
+        className={embedded ? "p-6 text-center" : "rounded-3xl bg-cream-50 p-10 text-center shadow-lift sm:p-14"}
       >
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-sage/15 text-sage-dark">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-8 w-8" aria-hidden="true">
@@ -358,7 +358,7 @@ export default function MultiStepForm() {
   }
 
   return (
-    <div className="rounded-3xl bg-cream-50 p-6 shadow-lift sm:p-10">
+    <div className={embedded ? "p-5 sm:p-6" : "rounded-3xl bg-cream-50 p-6 shadow-lift sm:p-10"}>
       <div className="mb-10">
         <div className="flex items-center justify-between">
           {[1, 2, 3].map((s) => (

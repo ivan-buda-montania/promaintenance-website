@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollManager from "./components/ScrollManager";
+import FloatingEstimate from "./components/FloatingEstimate";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Services from "./components/Services";
@@ -50,6 +51,7 @@ export default function App() {
         <Route path="/estimate" element={<EstimatePage />} />
         <Route path="*" element={<HomePage />} />
       </Routes>
+      <FloatingEstimate />
     </BrowserRouter>
   );
 }

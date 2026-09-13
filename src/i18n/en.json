@@ -263,6 +263,12 @@
     "whatsappCta": "WhatsApp",
     "reviewCta": "Review us"
   },
+  "estimateWidget": {
+    "open": "Get a free estimate",
+    "close": "Close estimate form",
+    "title": "Free Estimate",
+    "subtitle": "Three quick steps. We reply within two business days."
+  },
   "validation": {
     "selectService": "Pick a service.",
     "enterRoomSize": "Tell us the size, even roughly.",

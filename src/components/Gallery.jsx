@@ -69,7 +69,7 @@ export default function Gallery() {
                   after={project.after}
                   alt={project.title}
                 />
-                <figcaption className="flex items-baseline justify-between">
+                <figcaption className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                   <span className="font-display text-xl text-cream-50">{project.title}</span>
                   <span className="text-[11px] uppercase tracking-[0.22em] text-cream-50/55">
                     {project.room}

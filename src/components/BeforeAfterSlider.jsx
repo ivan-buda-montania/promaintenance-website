@@ -52,7 +52,7 @@ export default function BeforeAfterSlider({ before, after, alt }) {
   return (
     <div
       ref={containerRef}
-      className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-charcoal select-none cursor-ew-resize"
+      className="relative aspect-[4/3] w-full touch-pan-y overflow-hidden rounded-2xl bg-charcoal select-none cursor-ew-resize"
       onMouseDown={startDrag}
       onTouchStart={startDrag}
     >

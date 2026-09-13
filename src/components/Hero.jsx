@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate flex min-h-screen items-center justify-center overflow-hidden"
+      className="relative isolate flex min-h-[100svh] items-center justify-center overflow-hidden py-28 sm:py-32"
     >
       <img
         src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=2000&q=80"
@@ -71,7 +71,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.2, delay: 1.2 }}
-        className="absolute bottom-10 left-1/2 z-10 -translate-x-1/2 text-cream-50/70"
+        className="absolute bottom-10 left-1/2 z-10 hidden -translate-x-1/2 text-cream-50/70 sm:block"
         aria-hidden="true"
       >
         <div className="flex flex-col items-center gap-2">

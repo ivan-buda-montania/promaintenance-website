@@ -86,7 +86,7 @@ export default function Moodboard() {
           })}
         </div>
 
-        <motion.div layout className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div layout className="mt-10 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
           <AnimatePresence mode="popLayout">
             {visible.map((item, i) => {
               const pinned = isPinned(item.id);
@@ -107,8 +107,8 @@ export default function Moodboard() {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent opacity-90" aria-hidden="true" />
-                  <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4">
-                    <div>
+                  <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-3 sm:p-4">
+                    <div className="min-w-0">
                       <p className="text-sm font-medium text-cream-50">{item.title}</p>
                       <p className="text-[10px] uppercase tracking-[0.18em] text-cream-50/70">
                         {item.category}
@@ -119,7 +119,7 @@ export default function Moodboard() {
                       onClick={() => togglePin(item.id)}
                       aria-label={pinned ? `Unpin ${item.title}` : `Pin ${item.title}`}
                       aria-pressed={pinned}
-                      className={`flex h-10 w-10 items-center justify-center rounded-full transition-all ${
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-all sm:h-10 sm:w-10 ${
                         pinned
                           ? "bg-amber text-cream-50 scale-110"
                           : "bg-cream-50/90 text-charcoal hover:bg-cream-50 hover:scale-110"

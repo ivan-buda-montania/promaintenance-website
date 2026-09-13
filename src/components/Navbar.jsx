@@ -17,7 +17,7 @@ export default function Navbar() {
   // solid on scroll. Other routes (e.g. /estimate) have a light background, so
   // the bar must be solid from the top to stay readable.
   const onHome = pathname === "/";
-  const solid = scrolled || !onHome;
+  const solid = scrolled || !onHome || open;
 
   const NAV_LINKS = [
     { label: t("nav.services"), to: "/#services" },
@@ -124,9 +124,9 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="lg:hidden absolute inset-x-0 top-full bg-cream-50 shadow-lift"
+            className="lg:hidden absolute inset-x-0 top-full max-h-[calc(100dvh-100%)] overflow-y-auto bg-cream-50 shadow-lift"
           >
-            <ul className="container-prose flex flex-col gap-2 py-6">
+            <ul className="container-prose flex flex-col gap-2 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
               {NAV_LINKS.map((link) => (
                 <li key={link.to}>
                   <Link
@@ -143,7 +143,7 @@ export default function Navbar() {
                   </Link>
                 </li>
               ))}
-              <li className="pt-4 border-t border-cream-50/10 flex items-center gap-2">
+              <li className="pt-4 border-t border-charcoal/10 flex items-center gap-2">
                 <span className="flex-1 text-xs uppercase tracking-[0.18em] text-charcoal/50">Language</span>
                 <LanguageToggle className="text-charcoal hover:text-amber" />
               </li>
