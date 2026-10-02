@@ -1,7 +1,7 @@
 {
   "nav": {
     "services": "Services",
-    "gallery": "Gallery",
+    "gallery": "Our Work",
     "about": "About",
     "testimonials": "Testimonials",
     "planner": "Planner",
@@ -12,7 +12,7 @@
   "hero": {
     "tagline": "Maintenance & Remodeling Services — done with thirty years of craft, honest quotes, and a clean jobsite.",
     "startProject": "Start Your Project",
-    "viewWork": "View Our Work",
+    "contactCta": "Contact Us!",
     "scroll": "Scroll"
   },
   "services": {

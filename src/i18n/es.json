@@ -1,7 +1,7 @@
 {
   "nav": {
     "services": "Servicios",
-    "gallery": "Galería",
+    "gallery": "Nuestro trabajo",
     "about": "Sobre nosotros",
     "testimonials": "Testimonios",
     "planner": "Planificador",
@@ -12,7 +12,7 @@
   "hero": {
     "tagline": "Servicios de mantenimiento y remodelación — realizados con treinta años de oficio, presupuestos honestos y un sitio limpio.",
     "startProject": "Comienza tu proyecto",
-    "viewWork": "Ver nuestro trabajo",
+    "contactCta": "¡Contáctanos!",
     "scroll": "Desplázate"
   },
   "services": {

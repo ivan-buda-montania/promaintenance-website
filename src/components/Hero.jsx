@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import Logo from "./Logo";
 
+const PHONE_TEL = "+17604452261";
+
 export default function Hero() {
   const { t } = useTranslation();
   return (
@@ -61,8 +63,8 @@ export default function Hero() {
             {t("hero.startProject")}
             <span aria-hidden="true">→</span>
           </a>
-          <a href="#gallery" className="btn-secondary">
-            {t("hero.viewWork")}
+          <a href={`tel:${PHONE_TEL}`} className="btn-secondary">
+            {t("hero.contactCta")}
           </a>
         </motion.div>
       </div>
